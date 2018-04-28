@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(cpp-template VERSION 0.1.0)
 
+# Main programm, not necessary for a library
 include_directories(include)
 set(SOURCES src/main.cpp src/dummy.cpp)
-
 add_executable(cpp-template ${SOURCES})
 
+# Enable testing with CTest
 include(CTest)
 enable_testing()
 
