@@ -20,5 +20,5 @@ script:
 #  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
   - CXX=clang++-5.0 && CC=clang-5.0
   - cmake --build .
-  - ctest
+  - ctest --output-on-failure
 
