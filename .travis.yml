@@ -6,10 +6,10 @@ addons:
   apt:
     sources:
 #      - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-6.0
+      - llvm-toolchain-trusty-5.0
     packages:
 #      - g++-8
-      - clang-6.0
+      - clang-5.0
 
 before_script:
   - mkdir build
@@ -18,7 +18,7 @@ before_script:
 
 script:
 #  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
-  - CXX=clang++-6.0 && CC=clang-6.0
+  - CXX=clang++-5.0 && CC=clang-5.0
   - cmake --build .
   - ctest
 
