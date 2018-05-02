@@ -12,13 +12,12 @@ addons:
       - clang-5.0
 
 before_script:
+#  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
+  - CXX=clang++-5.0 && CC=clang-5.0
   - mkdir build
   - cd build
   - cmake ..
 
 script:
-#  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
-  - CXX=clang++-5.0 && CC=clang-5.0
   - cmake --build .
   - ctest --output-on-failure
-
