@@ -54,9 +54,5 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(dummy_test test/dummy_test.cpp src/dummy.cpp)
-target_link_libraries(dummy_test gtest_main)
+target_link_libraries(dummy_test gtest_main --coverage)
 add_test(NAME dummy_test COMMAND dummy_test)
-# Code coverage link library for GNU compiler
-if (CMAKE_COMPILER_IS_GNUCXX)
-  target_link_libraries(cpp-template --coverage)
-endif()
