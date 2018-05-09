@@ -1,19 +1,27 @@
-dist: trusty
 sudo: false
 language: cpp
+
+matrix:
+  include:
+    - os: linux
+      compiler: gcc
+    - os: linux
+      compiler: clang
+    - os: osx
+      compiler: gcc
+    - os: osx
+      copmiler: clang
 
 addons:
   apt:
     sources:
-#      - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
       - llvm-toolchain-trusty-5.0
     packages:
-#      - g++-8
+      - g++-8
       - clang-5.0
 
 before_script:
-#  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8
-  - CXX=clang++-5.0 && CC=clang-5.0
   - mkdir build
   - cd build
   - cmake ..
@@ -21,3 +29,6 @@ before_script:
 script:
   - cmake --build .
   - ctest --output-on-failure
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

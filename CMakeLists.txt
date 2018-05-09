@@ -1,10 +1,20 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(cpp-template VERSION 0.1.0)
 
+# Code coverage compile option for GNU compiler
+if (CMAKE_COMPILER_IS_GNUCXX)
+  add_compile_options(--coverage -O0)
+endif()
+
 # Main programm, not necessary for a library
 include_directories(include)
 set(SOURCES src/main.cpp src/dummy.cpp)
 add_executable(cpp-template ${SOURCES})
+# Code coverage link library for GNU compiler
+if (CMAKE_COMPILER_IS_GNUCXX)
+  target_link_libraries(cpp-template --coverage)
+endif()
+
 
 # Enable testing with CTest
 include(CTest)
@@ -46,3 +56,7 @@ endif()
 add_executable(dummy_test test/dummy_test.cpp src/dummy.cpp)
 target_link_libraries(dummy_test gtest_main)
 add_test(NAME dummy_test COMMAND dummy_test)
+# Code coverage link library for GNU compiler
+if (CMAKE_COMPILER_IS_GNUCXX)
+  target_link_libraries(cpp-template --coverage)
+endif()
