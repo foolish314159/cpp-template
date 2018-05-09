@@ -1,20 +1,20 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(cpp-template VERSION 0.1.0)
 
-# Code coverage compile option for GNU compiler
-if (CMAKE_COMPILER_IS_GNUCXX)
-  add_compile_options(--coverage -O0)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/CMakeModules)
+
+# Code coverage
+if(CMAKE_COMPILER_IS_GNUCXX)
+    include(CodeCoverage)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage dummy_test coverage)
 endif()
+
+set(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
 
 # Main programm, not necessary for a library
 include_directories(include)
 set(SOURCES src/main.cpp src/dummy.cpp)
 add_executable(cpp-template ${SOURCES})
-# Code coverage link library for GNU compiler
-if (CMAKE_COMPILER_IS_GNUCXX)
-  target_link_libraries(cpp-template --coverage)
-endif()
-
 
 # Enable testing with CTest
 include(CTest)
@@ -54,5 +54,5 @@ endif()
 
 # Now simply link against gtest or gtest_main as needed. Eg
 add_executable(dummy_test test/dummy_test.cpp src/dummy.cpp)
-target_link_libraries(dummy_test gtest_main --coverage)
+target_link_libraries(dummy_test gtest_main)
 add_test(NAME dummy_test COMMAND dummy_test)
