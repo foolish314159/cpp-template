@@ -38,9 +38,7 @@ before_script:
   - cd build
   - cmake ..
 
-script:
-  - cmake --build .
-  - ctest --output-on-failure
+script: ./ci/build.sh
 
 after_success:
   # Creating report
