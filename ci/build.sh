@@ -12,6 +12,9 @@ workingprocess() { echo -e "${BB}$1${NC}"; }
 alert() { echo -e "${RED}$1${NC}"; }
 
 # Building project
+mkdir build
+cd build
+cmake ..
 cmake --build .
 # Checks if last command didn't output 0
 # $? checks what last command outputed
