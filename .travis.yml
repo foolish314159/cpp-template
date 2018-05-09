@@ -32,6 +32,7 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - chmod +x ./ci/build.sh
 
 script: ./ci/build.sh
 
